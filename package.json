@@ -1,0 +1,18 @@
+{
+  "name": "note_app",
+  "version": "1.0.0",
+  "description": "this is a backend of a node application ",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "author": "vava",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.3",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3"
+  }
+}
