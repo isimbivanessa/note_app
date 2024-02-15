@@ -1,15 +1,21 @@
 //import expreess
 const express = require("express");
-const { notes } = require("../utils");
+const{getNotes, getSingleNote}=require('../controllers/notesController');
 
 //define router
 const router = express.Router();
+//get notes router
+router.get("/",getNotes );
 
-router.get("/", (req, res) => {
-  return res.status(200).json({
-    message: "all notes",
-    data: notes
-  });
-});
+// get one note
+router.get("/:noteId",getSingleNote)
+
+//add note
+router.get("/")
+
+
+//create a note route
+//router.post("/create-notes",addNote)
+
 //export the router
 module.exports = router

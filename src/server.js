@@ -1,42 +1,87 @@
-//import express
+// //import express
+// const express = require("express");
+
+// //import helmet
+// const helmet =require("helmet");
+
+// //import dotenv
+// require("dotenv").config();
+
+// //import cors
+// const cors = require("cors");
+// const noteRoutes = require("./routes/noteRoutes");
+
+// // initializing express/calling express object
+// const app = express();
+
+// //use cors
+// app.use(cors());
+
+// //root endpoint
+// //app which is the invocation of express()
+// app.get("/", (req, res) => {
+//   return res.status(200).json({
+//     message: "account create successful",
+//   });
+// });
+
+// //all routes
+// app.use("/notes", noteRoutes);
+
+// //not found
+// app.get("*", (req, res) => {
+//     return res.status(404).json({
+//       message: "not found",
+//     });
+//   });
+
+//   //use helmet
+//   app.use(helmet)
+
+// //define port and host
+
+// const port = process.env.PORT;
+// const host = process.env.HOST;
+
+// //listening to server
+// app.listen(port, () => {
+//   console.log(`server running  at ${host}:${port}`);
+// });
+
 const express = require("express");
-//import dotenv
 require("dotenv").config();
-
-//import cors
 const cors = require("cors");
+const helmet = require("helmet");
 const noteRoutes = require("./routes/noteRoutes");
-
-// initializing express/calling express object
 const app = express();
 
-//use cors
+app.use(express.json());
+app.use(helmet());
 app.use(cors());
 
-//root endpoint
-//app which is the invocation of express()
+
+
+
+// Set routes
 app.get("/", (req, res) => {
-  return res.status(200).json({
-    message: "account create successful",
+  res.status(200).json({
+    message: "Welcome to the Notes Projects APIs",
   });
 });
 
-//all routes
+// define your note route
 app.use("/notes", noteRoutes);
 
-//not found
 app.get("*", (req, res) => {
-    return res.status(404).json({
-      message: "not found",
-    });
+  res.status(404).json({
+    message: "Route doesn't exist",
   });
-  
-//define port and host
+});
 
-const port = process.env.PORT;
-const host = process.env.HOST;
+// Define the port number
+const { PORT, HOST } = process.env;
 
-//listening to server
-app.listen(port, () => {
-  console.log(`server running  at ${host}:${port}`);
+// Listening to the server
+app.listen(PORT, () => {
+  console.log(`Server is Running at ${HOST}:${PORT}`);
 });
