@@ -1,12 +1,28 @@
-const { notes } = require("../utils");
-//fetcing all notes
-const getNotes = (req, res) => {
-  return res.status(200).json({
-    message: "all notes",
-    data: notes,
-  });
-};
+const { Note } = require("../database/models");
+let notes=[]
 
+
+
+
+
+
+
+
+
+
+//fetcing all notes
+const getNotes =async (req, res) => {
+//   return res.status(200).json({
+//     message: "all notes",
+//     data: notes,
+//   });
+// };
+//fetching notes from our db using model Note
+const data=await Note.findAll()
+return res.status(200).json({
+  data,
+});
+};
 //fetching  a single note
 const getSingleNote = (req, res) => {
   //const noteId=req.params.noteId
@@ -25,9 +41,38 @@ const getSingleNote = (req, res) => {
     data:singleNote,
   });
 };
-const addNote=(req,res)=>{
-  const data=req.body
-  const newNote={id:notes.length+1,...data}
-  console.log(newNote)
-}
-module.exports = { getNotes,getSingleNote, addNote };
+const addNote = async(req, res) => {
+  const {title,content} = req.body 
+  const noteExists=await Note.findOne({
+    where:{title}
+  });
+  if(noteExists){
+    return res.status(400).json({
+      message:`Note with title:${title}already exists`
+    })
+  }
+  // create a new note
+  const newNote=await Note.create({
+    title,content
+  })
+
+  res.status(201).json({
+    message: "A Note created successfully",
+    data:newNote,
+  });
+};
+
+// delete
+const deleteNote=(req,res)=>{
+//get the id from the params
+const{noteId}=req.params;
+const id=parseInt(noteId)
+const noteToDelete=notes.find((note)=>
+{
+  
+})
+console.log(noteId)
+};
+
+
+module.exports = { getNotes,getSingleNote, addNote, deleteNote };

@@ -1,6 +1,6 @@
 //import expreess
 const express = require("express");
-const{getNotes, getSingleNote}=require('../controllers/notesController');
+const{getNotes, getSingleNote, addNote,deleteNote}=require('../controllers/notesController');
 
 //define router
 const router = express.Router();
@@ -11,11 +11,10 @@ router.get("/",getNotes );
 router.get("/:noteId",getSingleNote)
 
 //add note
-router.get("/")
+router.post("/",addNote)
 
-
-//create a note route
-//router.post("/create-notes",addNote)
-
+//delete note 
+router.delete("/",deleteNote)
+//update note
 //export the router
 module.exports = router

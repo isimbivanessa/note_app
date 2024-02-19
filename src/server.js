@@ -53,6 +53,7 @@ require("dotenv").config();
 const cors = require("cors");
 const helmet = require("helmet");
 const noteRoutes = require("./routes/noteRoutes");
+const { sequelize } = require("./database/models");
 const app = express();
 
 app.use(express.json());
@@ -81,7 +82,30 @@ app.get("*", (req, res) => {
 // Define the port number
 const { PORT, HOST } = process.env;
 
+
+
+//connect database
+const dbConnection= async()=>{
+  try{
+    //connect to database
+    await sequelize.authenticate();
+    console.log('DB connected successfully')
+    
+    }catch(error){
+      console.log(error);
+    }
+    
+    
+
+}
+
+
+
+
+
+
 // Listening to the server
-app.listen(PORT, () => {
+app.listen(PORT, async() => {
+  await dbConnection()
   console.log(`Server is Running at ${HOST}:${PORT}`);
 });
