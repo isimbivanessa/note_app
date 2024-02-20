@@ -6,16 +6,18 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "migrate":"npx sequelize-cli db:migrate",
-    "rollback":"npx sequelize-cli db:migrate:undo"
+    "migrate": "npx sequelize-cli db:migrate",
+    "rollback": "npx sequelize-cli db:migrate:undo"
   },
   "author": "vava",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.3",
     "express": "^4.18.2",
     "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.1",
     "nodemon": "^3.0.3",
     "sequelize": "^6.37.0"
